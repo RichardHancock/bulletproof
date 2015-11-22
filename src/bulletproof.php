@@ -389,15 +389,14 @@ class Image implements \ArrayAccess
 
         /* validate image mime type */
         if (!in_array($image->mime, $image->mimeTypes)) {
-            $ext = implode(", ", $image->mimeTypes);
+            //$ext = implode(", ", $image->mimeTypes);
             $image->error = Image::IMAGE_ERR_REJECTED_FILE_TYPE;
             return false;
         }     
 
         /* check image size based on the settings */
         if ($files["size"] < $minSize || $files["size"] > $maxSize) {
-            $min = intval($minSize / 1000) ?: 1; $max = intval($maxSize / 1000);
-            
+            //$min = intval($minSize / 1000) ?: 1; $max = intval($maxSize / 1000);
             $image->error = Image::IMAGE_ERR_INVALID_FILE_SIZE;
             return false;
         }
@@ -429,7 +428,7 @@ class Image implements \ArrayAccess
             "fullpath" => $image->fullPath
         );
 
-        if ($image->error === "") {
+        if ($image->error === 0) {
             $moveUpload = $image->moveUploadedFile($files["tmp_name"], $image->fullPath);
             if (false !== $moveUpload) {
                 return $image;
